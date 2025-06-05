@@ -1,30 +1,30 @@
 // 数学学习内容
 const mathData = {
-    title: "字字",
-    description: "字字、字字、字字字字字字",
+    title: "数学",
+    description: "代数、几何、微积分等数学知识",
     iconClass: "fas fa-calculator",
     subcategories: [
         { 
             id: "algebra",
-            title: "字字", 
+            title: "代数", 
             icon: "fas fa-superscript",
             articles: [
                 {
                     id: "quadratic",
-                    title: "字字字字字",
-                    content: `<h3>字字字字字字字</h3>
+                    title: "二次方程解法",
+                    content: `<h3>二次方程的一般形式</h3>
                     <p>ax² + bx + c = 0 (a ≠ 0)</p>
                     
-                    <h3>字字字字</h3>
-                    <p><strong>字字字字字</strong>：字字字字字字字字字</p>
-                    <p>字：x² - 5x + 6 = 0 → (x-2)(x-3)=0 → x=2 字 x=3</p>
+                    <h3>求解方法</h3>
+                    <p><strong>因式分解法</strong>：适用于可因式分解的方程</p>
+                    <p>例：x² - 5x + 6 = 0 → (x-2)(x-3)=0 → x=2 或 x=3</p>
                     
-                    <p><strong>字字字字</strong>：字字字字字字字字字字</p>
-                    <p>字：x² + 6x + 5 = 0 → (x+3)² - 4 = 0 → (x+3)²=4 → x=-1 字 x=-5</p>
+                    <p><strong>配方法</strong>：将方程化为完全平方形式</p>
+                    <p>例：x² + 6x + 5 = 0 → (x+3)² - 4 = 0 → (x+3)²=4 → x=-1 或 x=-5</p>
                     
-                    <p><strong>字字字字</strong>：字字字字字字字字</p>
+                    <p><strong>公式法</strong>：使用求根公式</p>
                     <p>x = [-b ± √(b² - 4ac)] / (2a)</p>
-                    <p>字：2x² + 5x - 3 = 0 → x = [-5 ± √(25+24)]/4 → x=0.5 字 x=-3</p>`
+                    <p>例：2x² + 5x - 3 = 0 → x = [-5 ± √(25+24)]/4 → x=0.5 或 x=-3</p>`
                 }
             ]
         }
