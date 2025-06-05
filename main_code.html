@@ -3,63 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>'</title>
+    <title>废物</title>
+    <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>。</h1>
-            <p class="subtitle">。</p>
+            <h1>废物</h1>
+           <p class="subtitle">废物</p>
         </div>
     </header>
     
     <div class="container">
-        <div class="categories">
-            <!-- 分类卡片将通过JavaScript动态生成 -->
-        </div>
-        
-        <div id="subcategoriesContainer">
-            <!-- 子类按钮将通过JavaScript动态生成 -->
-        </div>
-        
-        <div id="articleContainer" class="article-content">
-            <!-- 文章内容将通过JavaScript动态生成 -->
-        </div>
-        
+        <div class="categories"></div>
+        <div id="subcategoriesContainer"></div>
+        <div id="articleContainer" class="article-content"></div>
         <div class="ai-section">
             <div class="ai-header">
-                <div class="ai-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h2 class="ai-title">DeepSeek</h2>
+                <div class="ai-icon"><i class="fas fa-robot"></i></div>
+                <h2 class="ai-title">DeepSuck</h2>
             </div>
-            <p>！</p>
-            
+            <p>有问题吗！</p>
             <div class="ai-prompt">
                 <input type="text" class="ai-input" id="aiQuestion" placeholder="输入您的问题，例如：如何提高英语写作水平？">
                 <button class="ai-submit" onclick="askAI()">提问</button>
             </div>
-            
-            <div class="ai-response" id="aiResponse">
-                <!-- AI回复将显示在这里 -->
-            </div>
+            <div class="ai-response" id="aiResponse"></div>
         </div>
-        
         <p class="footer-note">
-            
+            '<br>
             当前内容文件：<span id="currentDataFiles">chinese.js, english.js, math.js, other_subject.js</span>
         </p>
     </div>
-
     <!-- 引入数据文件 -->
-    <script src="data/chinese.js"></script>
-    <script src="data/english.js"></script>
-    <script src="data/math.js"></script>
-    <script src="data/other_subject.js"></script>
-    
+    <script src="chinese.js"></script>
+    <script src="english.js"></script>
+    <script src="math.js"></script>
+    <script src="other_subject.js"></script>
     <!-- 引入主脚本 -->
-    <script src="script.js"></script>
+    <script src="ai.js"></script>
 </body>
 </html>
