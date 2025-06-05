@@ -134,7 +134,7 @@ const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"; // 根�
 async function askAI() {
     const question = document.getElementById('aiQuestion').value.trim();
     if (!question) {
-        alert('请输入问题');
+        alert('用不了');
         return;
     }
     
@@ -176,7 +176,7 @@ async function askAI() {
         responseArea.innerHTML = formatAIResponse(aiResponse);
     } catch (error) {
         console.error('AI请求错误:', error);
-        responseArea.innerHTML = `<p class="error">请求AI助手时出错: ${error.message}</p>`;
+        responseArea.innerHTML = `<p class="error">api用不了，自己上官网用<a href="https://chat.deepseek.com/a/chat/">https://chat.deepseek.com/a/chat/</a>: ${error.message}</p>`;
     }
 }
 
