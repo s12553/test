@@ -126,10 +126,14 @@ function backToArticles(categoryId, subId) {
     document.getElementById('articleContainer').style.display = 'none';
 }
 
-// 模拟AI问答功能
-function askAI() {
-    const question = document.getElementById('aiQuestion').value;
-    if (!question.trim()) {
+// 配置 DeepSeek API
+const DEEPSEEK_API_KEY = "your_api_key_here"; // 替换为您的实际API密钥
+const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"; // 根据实际API文档调整
+
+// 真实AI问答功能
+async function askAI() {
+    const question = document.getElementById('aiQuestion').value.trim();
+    if (!question) {
         alert('请输入问题');
         return;
     }
@@ -138,38 +142,56 @@ function askAI() {
     responseArea.style.display = 'block';
     responseArea.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> 正在思考中...</p>';
     
-    // 模拟API请求延迟
-    setTimeout(() => {
-        // 在实际应用中，这里会调用DeepSeek API
-        // 以下是模拟的响应
-        let response = '';
+    try {
+        const response = await fetch(DEEPSEEK_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+            },
+            body: JSON.stringify({
+                model: "deepseek-chat", // 根据实际情况调整模型名称
+                messages: [
+                    {
+                        role: "system",
+                        content: "你是一个专业的学习助手，专门帮助学生学习中文、英文、数学和其他学科知识。回答要专业、准确且易于理解。"
+                    },
+                    {
+                        role: "user",
+                        content: question
+                    }
+                ],
+                temperature: 0.7,
+                max_tokens: 1000
+            })
+        });
         
-        if (question.includes('英语') || question.includes('English')) {
-            response = `<p><strong>关于英语学习，建议：</strong></p>
-            <ul>
-                <li>每天坚持阅读英文文章，可以从简单的新闻开始</li>
-                <li>使用记忆软件如Anki来记忆单词</li>
-                <li>找语言交换伙伴进行口语练习</li>
-                <li>观看英语影视剧，使用英文字幕</li>
-            </ul>
-            <p>学习语言的关键在于坚持和沉浸式学习环境。</p>`;
-        } else if (question.includes('数学') || question.includes('math')) {
-            response = `<p><strong>数学学习技巧：</strong></p>
-            <ul>
-                <li>理解概念比死记硬背更重要</li>
-                <li>多做习题，特别是不同类型的题目</li>
-                <li>学习时尝试向他人解释概念，这能加深理解</li>
-                <li>建立错题本，定期复习</li>
-            </ul>
-            <p>数学是不断练习和思考的学科，不要害怕犯错。</p>`;
-        } else {
-            response = `<p>感谢您的提问！在真实环境中，这里会通过DeepSeek API提供专业的解答。</p>
-            <p>您的问题是："${question}"</p>
-            <p>为了获得更准确的回答，请确保问题具体明确，包含学科领域和具体问题点。</p>`;
+        if (!response.ok) {
+            throw new Error(`API请求失败: ${response.status}`);
         }
         
-        responseArea.innerHTML = response;
-    }, 1500);
+        const data = await response.json();
+        const aiResponse = data.choices[0].message.content;
+        
+        responseArea.innerHTML = formatAIResponse(aiResponse);
+    } catch (error) {
+        console.error('AI请求错误:', error);
+        responseArea.innerHTML = `<p class="error">请求AI助手时出错: ${error.message}</p>`;
+    }
+}
+
+// 格式化AI回复
+function formatAIResponse(text) {
+    // 将Markdown格式的列表转换为HTML
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    text = text.replace(/^- (.*?)(?=\n|$)/gm, '<li>$1</li>');
+    text = text.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
+    
+    // 保留换行
+    text = text.replace(/\n/g, '<br>');
+    
+    return text;
 }
 
 // 添加一个简单的面包屑导航功能
