@@ -375,4 +375,23 @@ h1 {
     .ai-submit {
         padding: 12px;
     }
+    .error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #dc3545;
+}
+
+.loading-dots::after {
+    content: '.';
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60% { content: '...'; }
+    80%, 100% { content: ''; }
+}
 }
