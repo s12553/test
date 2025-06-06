@@ -740,59 +740,7 @@
         }
 
         // 模拟AI问答功能
-        function askAI() {
-            const question = document.getElementById('aiQuestion').value;
-            if (!question.trim()) {
-                alert('请输入问题');
-                return;
-            }
-            
-            const responseArea = document.getElementById('aiResponse');
-            responseArea.style.display = 'block';
-            responseArea.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> 正在思考中...</p>';
-            
-            // 模拟API请求延迟
-            setTimeout(() => {
-                // 在实际应用中，这里会调用DeepSeek API
-                // 以下是模拟的响应
-                let response = '';
-                
-                if (question.includes('英语') || question.includes('English')) {
-                    response = `<p><strong>关于英语学习，建议：</strong></p>
-                    <ul>
-                        <li>每天坚持阅读英文文章，可以从简单的新闻开始</li>
-                        <li>使用记忆软件如Anki来记忆单词</li>
-                        <li>找语言交换伙伴进行口语练习</li>
-                        <li>观看英语影视剧，使用英文字幕</li>
-                    </ul>
-                    <p>学习语言的关键在于坚持和沉浸式学习环境。</p>`;
-                } else if (question.includes('数学') || question.includes('math')) {
-                    response = `<p><strong>数学学习技巧：</strong></p>
-                    <ul>
-                        <li>理解概念比死记硬背更重要</li>
-                        <li>多做习题，特别是不同类型的题目</li>
-                        <li>学习时尝试向他人解释概念，这能加深理解</li>
-                        <li>建立错题本，定期复习</li>
-                    </ul>
-                    <p>数学是不断练习和思考的学科，不要害怕犯错。</p>`;
-                } else if (question.includes('语文') || question.includes('中文')) {
-                    response = `<p><strong>中文学习建议：</strong></p>
-                    <ul>
-                        <li>多读经典文学作品，积累语言素材</li>
-                        <li>坚持写日记或随笔，锻炼表达能力</li>
-                        <li>学习古诗词，理解其意境和表达技巧</li>
-                        <li>关注现代汉语语法规则和表达方式</li>
-                    </ul>
-                    <p>语文学习需要长期的积累和感悟。</p>`;
-                } else {
-                    response = `<p>感谢您的提问！在真实环境中，这里会通过DeepSeek API提供专业的解答。</p>
-                    <p>您的问题是："${question}"</p>
-                    <p>为了获得更准确的回答，请确保问题具体明确，包含学科领域和具体问题点。</p>`;
-                }
-                
-                responseArea.innerHTML = response;
-            }, 1500);
-        }
+
 
         // 添加一个简单的面包屑导航功能
         function updateBreadcrumb() {
