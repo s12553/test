@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学习平台</title>
+    <title>学习平台！</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -341,6 +341,153 @@
             border-left: 4px solid var(--accent);
         }
 
+        /* 留言板样式 */
+        .message-board {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            border: 1px solid #e0e8ff;
+        }
+
+        .message-board h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-board h2 i {
+            color: var(--accent);
+        }
+
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .message-input, .message-textarea {
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .message-input:focus, .message-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .message-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .message-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 150px;
+        }
+
+        .message-submit:hover {
+            background: var(--secondary);
+        }
+
+        .message-list {
+            margin-top: 30px;
+        }
+
+        .message-item {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            border-left: 4px solid var(--accent);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .message-author {
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .message-time {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .message-content {
+            line-height: 1.6;
+            padding: 10px 0;
+        }
+
+        .message-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .message-action {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .message-action:hover {
+            color: var(--primary);
+        }
+
+        .no-messages {
+            text-align: center;
+            padding: 30px;
+            color: var(--gray);
+            font-style: italic;
+        }
+
         .footer-note {
             text-align: center;
             margin-top: 40px;
@@ -383,6 +530,16 @@
             .ai-submit {
                 padding: 12px;
             }
+            
+            .message-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .message-time {
+                margin-left: 28px; /* 对齐作者图标 */
+            }
         }
     </style>
 </head>
@@ -423,6 +580,27 @@
             
             <div class="ai-response" id="aiResponse">
                 <!-- AI回复将显示在这里 -->
+            </div>
+        </div>
+        
+        <!-- 留言板部分 -->
+        <div class="message-board">
+            <h2><i class="fas fa-comments"></i> 学习交流留言板</h2>
+            <div class="message-form">
+                <div class="form-group">
+                    <label for="messageName">您的昵称</label>
+                    <input type="text" class="message-input" id="messageName" placeholder="输入您的昵称">
+                </div>
+                <div class="form-group">
+                    <label for="messageContent">留言内容</label>
+                    <textarea class="message-textarea" id="messageContent" placeholder="分享您的想法、问题或学习心得..."></textarea>
+                </div>
+                <button class="message-submit" onclick="submitMessage()">
+                    <i class="fas fa-paper-plane"></i> 提交留言
+                </button>
+            </div>
+            <div class="message-list" id="messageList">
+                <!-- 留言将在这里动态生成 -->
             </div>
         </div>
         
@@ -622,9 +800,13 @@
             article: null
         };
 
+        // 留言板数据
+        let messages = JSON.parse(localStorage.getItem('messages')) || [];
+        
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
             generateCategoryCards();
+            renderMessages();
         });
 
         // 生成分类卡片
@@ -736,11 +918,150 @@
         }
 
         // 模拟AI问答功能
+        function askAI() {
+            const question = document.getElementById('aiQuestion').value;
+            if (!question.trim()) {
+                alert('请输入问题');
+                return;
+            }
+            
+            const responseArea = document.getElementById('aiResponse');
+            responseArea.style.display = 'block';
+            responseArea.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> 正在思考中...</p>';
+            
+            // 模拟API请求延迟
+            setTimeout(() => {
+                // 在实际应用中，这里会调用DeepSeek API
+                // 以下是模拟的响应
+                let response = '';
+                
+                if (question.includes('英语') || question.includes('English')) {
+                    response = `<p><strong>关于英语学习，建议：</strong></p>
+                    <ul>
+                        <li>每天坚持阅读英文文章，可以从简单的新闻开始</li>
+                        <li>使用记忆软件如Anki来记忆单词</li>
+                        <li>找语言交换伙伴进行口语练习</li>
+                        <li>观看英语影视剧，使用英文字幕</li>
+                    </ul>
+                    <p>学习语言的关键在于坚持和沉浸式学习环境。</p>`;
+                } else if (question.includes('数学') || question.includes('math')) {
+                    response = `<p><strong>数学学习技巧：</strong></p>
+                    <ul>
+                        <li>理解概念比死记硬背更重要</li>
+                        <li>多做习题，特别是不同类型的题目</li>
+                        <li>学习时尝试向他人解释概念，这能加深理解</li>
+                        <li>建立错题本，定期复习</li>
+                    </ul>
+                    <p>数学是不断练习和思考的学科，不要害怕犯错。</p>`;
+                } else {
+                    response = `<p>感谢您的提问！在真实环境中，这里会通过DeepSeek API提供专业的解答。</p>
+                    <p>您的问题是："${question}"</p>
+                    <p>为了获得更准确的回答，请确保问题具体明确，包含学科领域和具体问题点。</p>`;
+                }
+                
+                responseArea.innerHTML = response;
+            }, 1500);
+        }
 
-
-        // 添加一个简单的面包屑导航功能
-        function updateBreadcrumb() {
-            // 在实际实现中可以添加面包屑导航
+        // 留言板功能
+        function submitMessage() {
+            const nameInput = document.getElementById('messageName');
+            const contentInput = document.getElementById('messageContent');
+            
+            const name = nameInput.value.trim();
+            const content = contentInput.value.trim();
+            
+            if (!name) {
+                alert('请输入昵称');
+                return;
+            }
+            
+            if (!content) {
+                alert('请输入留言内容');
+                return;
+            }
+            
+            // 创建新留言
+            const newMessage = {
+                id: Date.now(),
+                name: name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                likes: 0
+            };
+            
+            // 添加到消息数组
+            messages.unshift(newMessage);
+            
+            // 保存到localStorage
+            localStorage.setItem('messages', JSON.stringify(messages));
+            
+            // 清空输入
+            nameInput.value = '';
+            contentInput.value = '';
+            
+            // 重新渲染消息列表
+            renderMessages();
+            
+            // 显示成功提示
+            alert('留言提交成功！');
+        }
+        
+        function renderMessages() {
+            const messageList = document.getElementById('messageList');
+            
+            if (messages.length === 0) {
+                messageList.innerHTML = '<div class="no-messages"><i class="fas fa-comment-slash"></i> 暂无留言，成为第一个分享想法的人吧！</div>';
+                return;
+            }
+            
+            messageList.innerHTML = '';
+            
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message-item';
+                
+                // 格式化时间
+                const date = new Date(message.timestamp);
+                const formattedDate = `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+                
+                messageElement.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-author">
+                            <i class="fas fa-user"></i> ${message.name}
+                        </div>
+                        <div class="message-time">${formattedDate}</div>
+                    </div>
+                    <div class="message-content">${message.content}</div>
+                    <div class="message-footer">
+                        <button class="message-action" onclick="likeMessage(${message.id})">
+                            <i class="fas fa-thumbs-up"></i> 点赞 (${message.likes})
+                        </button>
+                        <button class="message-action" onclick="deleteMessage(${message.id})">
+                            <i class="fas fa-trash"></i> 删除
+                        </button>
+                    </div>
+                `;
+                
+                messageList.appendChild(messageElement);
+            });
+        }
+        
+        function likeMessage(id) {
+            const messageIndex = messages.findIndex(msg => msg.id === id);
+            if (messageIndex !== -1) {
+                messages[messageIndex].likes++;
+                localStorage.setItem('messages', JSON.stringify(messages));
+                renderMessages();
+            }
+        }
+        
+        function deleteMessage(id) {
+            if (confirm('确定要删除这条留言吗？')) {
+                messages = messages.filter(msg => msg.id !== id);
+                localStorage.setItem('messages', JSON.stringify(messages));
+                renderMessages();
+            }
         }
     </script>
 </body>
