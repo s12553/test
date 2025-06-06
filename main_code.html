@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学习平台！</title>
+    <title>学习平台</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -76,19 +76,28 @@
                 title: "中文学习",
                 description: "学",
                 iconClass: "fas fa-book-open",
-                subcategories: []
+                subcategories: [
+                    { id: "kwwd", title: "课文问答", icon: "fas fa-scroll" },
+                    { id: "modern", title: "现代汉语", icon: "fas fa-pencil-alt" }
+                ]
             },
             english: {
                 title: "英文学习",
                 description: "语法、词汇、阅读与写作提升",
                 iconClass: "fas fa-language",
-                subcategories: []
+                subcategories: [
+                    { id: "grammar", title: "英语语法", icon: "fas fa-spell-check" },
+                    { id: "vocabulary", title: "词汇", icon: "fas fa-book" }
+                ]
             },
             math: {
                 title: "数学",
                 description: "代数、几何、微积分等数学知识",
                 iconClass: "fas fa-calculator",
-                subcategories: []
+                subcategories: [
+                    { id: "algebra", title: "代数", icon: "fas fa-superscript" },
+                    { id: "geometry", title: "几何", icon: "fas fa-shapes" }
+                ]
             }
         };
 
@@ -108,8 +117,37 @@
                         <p class="category-desc">${category.description}</p>
                     </div>
                 `;
+                card.onclick = () => showSubcategories(categoryId);
                 container.appendChild(card);
             }
+        }
+
+        function showSubcategories(categoryId) {
+            const category = contentData[categoryId];
+            if (!category) return;
+
+            const subContainer = document.querySelector('.categories');
+            subContainer.innerHTML = '';
+
+            const backBtn = document.createElement('button');
+            backBtn.textContent = '返回';
+            backBtn.onclick = generateCategoryCards;
+            subContainer.appendChild(backBtn);
+
+            category.subcategories.forEach(sub => {
+                const btn = document.createElement('div');
+                btn.className = 'category-card';
+                btn.innerHTML = `
+                    <div class="category-icon">
+                        <i class="${sub.icon}"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">${sub.title}</h3>
+                    </div>
+                `;
+                btn.onclick = () => alert(`你点击了子分类：${sub.title}`);
+                subContainer.appendChild(btn);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', function() {
