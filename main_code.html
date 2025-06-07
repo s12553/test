@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub同步</title>
+    <title>GitHub同步学习平台</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -660,6 +660,29 @@
             animation: spin 1s linear infinite;
         }
 
+        .sync-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .sync-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -701,22 +724,22 @@
 <body>
     <header>
         <div class="container">
-            <h1>made by 16</h1>
-            <p class="subtitle">同步</p>
+            <h1>学习内容同步平台</h1>
+            <p class="subtitle">基于GitHub的内容同步与协作系统</p>
             
             <div class="github-config">
-                <h3><i class="fab fa-github"></i> 配置</h3>
+                <h3><i class="fab fa-github"></i> GitHub配置</h3>
                 <input type="text" id="githubToken" placeholder="输入GitHub个人访问令牌">
                 <input type="text" id="githubRepo" placeholder="用户名/仓库名 (如: yourname/learning-content)">
                 <input type="text" id="githubBranch" placeholder="分支名称 (默认为main)" value="main">
-                <button onclick="saveGithubConfig()">保存</button>
+                <button onclick="saveGithubConfig()">保存配置</button>
                 
                 <div class="github-status" id="githubStatus">
-                    <i class="fas fa-circle"></i> <span>未连接</span>
+                    <i class="fas fa-circle"></i> <span>未连接GitHub</span>
                 </div>
                 
                 <button class="sync-btn" onclick="syncWithGitHub()">
-                    <i class="fas fa-sync-alt"></i> 同步
+                    <i class="fas fa-sync-alt"></i> 同步内容
                 </button>
             </div>
         </div>
@@ -740,9 +763,9 @@
                 <div class="ai-icon">
                     <i class="fas fa-robot"></i>
                 </div>
-                <h2 class="ai-title">Dicksuck</h2>
+                <h2 class="ai-title">AI学习助手</h2>
             </div>
-            <p>用不了</p>
+            <p>输入您的问题，获取学科相关的学习建议</p>
             
             <div class="ai-prompt">
                 <input type="text" class="ai-input" id="aiQuestion" placeholder="输入您的问题，例如：如何提高英语写作水平？">
@@ -756,18 +779,18 @@
         
         <!-- 留言板部分 -->
         <div class="message-board">
-            <h2><i class="fas fa-comments"></i> 先不修</h2>
+            <h2><i class="fas fa-comments"></i> 学习讨论区</h2>
             <div class="message-form">
                 <div class="form-group">
                     <label for="messageName">昵称</label>
-                    <input type="text" class="message-input" id="messageName" placeholder="输入">
+                    <input type="text" class="message-input" id="messageName" placeholder="输入您的昵称">
                 </div>
                 <div class="form-group">
                     <label for="messageContent">内容</label>
-                    <textarea class="message-textarea" id="messageContent" placeholder="别用"></textarea>
+                    <textarea class="message-textarea" id="messageContent" placeholder="分享您的想法或问题..."></textarea>
                 </div>
                 <button class="message-submit" onclick="submitMessage()">
-                    <i class="fas fa-paper-plane"></i> 提交
+                    <i class="fas fa-paper-plane"></i> 提交留言
                 </button>
             </div>
             <div class="message-list" id="messageList">
@@ -776,9 +799,14 @@
         </div>
         
         <p class="footer-note">
-            通过GitHub同步<br>
+            所有内容通过GitHub同步，确保多设备一致性<br>
             当前内容文件：<span id="currentDataFiles">chinese.js, english.js, math.js, others.js</span>
         </p>
+    </div>
+
+    <div class="sync-notification" id="syncNotification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">内容同步成功！</span>
     </div>
 
     <script>
@@ -786,7 +814,7 @@
         let contentData = {
             chinese: {
                 title: "中文学习",
-                description: "学",
+                description: "经典课文解析、古诗词鉴赏与现代文阅读",
                 iconClass: "fas fa-book-open",
                 subcategories: [
                     { 
@@ -962,7 +990,7 @@
             
             localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
             updateGithubStatus();
-            alert('GitHub配置已保存！');
+            showNotification('GitHub配置已保存！');
         }
         
         // 更新GitHub状态显示
@@ -979,15 +1007,26 @@
             }
         }
         
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.getElementById('syncNotification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
         // 从GitHub同步内容
         function syncWithGitHub() {
             if (!githubConfig.token || !githubConfig.repo) {
-                alert('请先配置GitHub信息！');
+                showNotification('请先配置GitHub信息！');
                 return;
             }
             
-            // 在实际应用中，这里会调用GitHub API获取内容数据
-            // 以下是模拟同步过程
             const syncBtn = document.querySelector('.sync-btn');
             syncBtn.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> 同步中...`;
             syncBtn.disabled = true;
@@ -996,10 +1035,15 @@
             setTimeout(() => {
                 // 在实际应用中，这里会从GitHub获取最新的contentData
                 // 以下是模拟更新
-                alert('内容已从GitHub同步成功！');
+                showNotification('内容已从GitHub同步成功！');
                 
                 // 重新生成分类卡片
                 generateCategoryCards();
+                
+                // 如果当前正在查看文章，刷新文章内容
+                if (currentState.article) {
+                    showArticle(currentState.category, currentState.subcategory, currentState.article);
+                }
                 
                 // 恢复按钮状态
                 syncBtn.innerHTML = `<i class="fas fa-sync-alt"></i> 从GitHub同步内容`;
@@ -1010,19 +1054,17 @@
         // 保存内容到GitHub
         function saveToGitHub() {
             if (!githubConfig.token || !githubConfig.repo) {
-                alert('请先配置GitHub信息！');
+                showNotification('请先配置GitHub信息！');
                 return;
             }
             
-            // 在实际应用中，这里会调用GitHub API更新内容
-            // 以下是模拟保存过程
             const saveBtn = document.getElementById('saveArticleBtn');
             saveBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> 保存中...`;
             saveBtn.disabled = true;
             
             // 模拟API请求延迟
             setTimeout(() => {
-                alert('内容已保存到GitHub！其他设备刷新后即可看到更新。');
+                showNotification('内容已保存到GitHub！其他设备刷新后即可看到更新。');
                 
                 // 退出编辑模式
                 exitEditMode();
@@ -1030,6 +1072,9 @@
                 // 恢复按钮状态
                 saveBtn.innerHTML = `<i class="fas fa-save"></i> 保存`;
                 saveBtn.disabled = false;
+                
+                // 重新显示文章以刷新内容
+                showArticle(currentState.category, currentState.subcategory, currentState.article);
             }, 1500);
         }
 
@@ -1196,7 +1241,7 @@
         function askAI() {
             const question = document.getElementById('aiQuestion').value;
             if (!question.trim()) {
-                alert('请输入问题');
+                showNotification('请输入问题');
                 return;
             }
             
@@ -1247,12 +1292,12 @@
             const content = contentInput.value.trim();
             
             if (!name) {
-                alert('请输入昵称');
+                showNotification('请输入昵称');
                 return;
             }
             
             if (!content) {
-                alert('请输入留言内容');
+                showNotification('请输入留言内容');
                 return;
             }
             
@@ -1279,7 +1324,7 @@
             renderMessages();
             
             // 显示成功提示
-            alert('留言提交成功！');
+            showNotification('留言提交成功！');
         }
         
         function renderMessages() {
