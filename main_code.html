@@ -6,6 +6,7 @@
     <title>GitHub同步学习平台</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 保持原有样式不变 */
         * {
             margin: 0;
             padding: 0;
@@ -800,7 +801,7 @@
         
         <p class="footer-note">
             所有内容通过GitHub同步，确保多设备一致性<br>
-            当前内容文件：<span id="currentDataFiles">chinese.js, english.js, math.js, others.js</span>
+            当前内容文件：<span id="currentDataFiles">content.json</span>
         </p>
     </div>
 
@@ -811,146 +812,8 @@
 
     <script>
         // 初始内容数据
-        let contentData = {
-            chinese: {
-                title: "中文学习",
-                description: "经典课文解析、古诗词鉴赏与现代文阅读",
-                iconClass: "fas fa-book-open",
-                subcategories: [
-                    { 
-                        id: "kwwd",
-                        title: "课文问答", 
-                        icon: "fas fa-scroll",
-                        articles: [
-                            {
-                                id: "tang_poetry",
-                                title: "为学",
-                                content: `<h3>为学</h3>
-                                <ul>
-                                    <li><strong>「天下事有難易乎」（第1段）一句運用了甚麼修辭手法？</strong>：设问</li>
-                                </ul>
-                                
-                                <h3>代表诗人及作品</h3>
-                                <p><strong>李白</strong> - 被称为"诗仙"，代表作《静夜思》、《将进酒》等</p>
-                                <p><strong>杜甫</strong> - 被誉为"诗圣"，代表作《春望》、《登高》等</p>
-                                <p><strong>王维</strong> - 以山水田园诗著称，代表作《山居秋暝》、《鸟鸣涧》等</p>
-                                
-                                <h3>学习建议</h3>
-                                <p>学习唐诗应注重理解诗歌的创作背景、诗人的生平经历以及诗歌中的意象运用。建议从短小精悍的五言绝句开始，逐步过渡到长篇古风。</p>`
-                            },
-                            {
-                                id: "dream_red",
-                                title: "《红楼梦》解析",
-                                content: `<h3>《红楼梦》概述</h3>
-                                <p>《红楼梦》是中国古典四大名著之一，作者曹雪芹。小说以贾、史、王、薛四大家族的兴衰为背景，以贾宝玉、林黛玉、薛宝钗的爱情婚姻悲剧为主线，描绘了封建社会的世态百相。</p>
-                                
-                                <h3>主要人物分析</h3>
-                                <p><strong>贾宝玉</strong>：封建社会的叛逆者，厌恶功名利禄，崇尚自由</p>
-                                <p><strong>林黛玉</strong>：才情横溢，多愁善感，具有强烈的自尊心</p>
-                                <p><strong>薛宝钗</strong>：端庄稳重，深谙世故，是封建礼教的典范</p>
-                                
-                                <h3>艺术特色</h3>
-                                <ul>
-                                    <li>宏大而精密的结构布局</li>
-                                    <li>丰富生动的人物形象（共975人）</li>
-                                    <li>精湛的语言艺术</li>
-                                    <li>深刻的主题思想</li>
-                                </ul>`
-                            }
-                        ]
-                    }
-                ]
-            },
-            english: {
-                title: "英文学习",
-                description: "语法、词汇、阅读与写作提升",
-                iconClass: "fas fa-language",
-                subcategories: [
-                    { 
-                        id: "grammar",
-                        title: "英语语法", 
-                        icon: "fas fa-spell-check",
-                        articles: [
-                            {
-                                id: "tenses",
-                                title: "英语时态详解",
-                                content: `<h3>英语时态概览</h3>
-                                <p>英语共有12种主要时态，分为4个时间（现在、过去、将来、过去将来）和4个状态（一般、进行、完成、完成进行）。</p>
-                                
-                                <h3>常用时态解析</h3>
-                                <p><strong>一般现在时</strong>：表示经常性、习惯性的动作或状态</p>
-                                <p>结构：主语 + 动词原形（第三人称单数加s）</p>
-                                <p>例句：I work every day. She works in a hospital.</p>
-                                
-                                <p><strong>现在进行时</strong>：表示正在进行的动作</p>
-                                <p>结构：am/is/are + 现在分词</p>
-                                <p>例句：They are studying English now.</p>
-                                
-                                <p><strong>现在完成时</strong>：表示过去发生的动作对现在的影响</p>
-                                <p>结构：have/has + 过去分词</p>
-                                <p>例句：I have finished my homework.</p>`
-                            }
-                        ]
-                    }
-                ]
-            },
-            math: {
-                title: "数学",
-                description: "代数、几何、微积分等数学知识",
-                iconClass: "fas fa-calculator",
-                subcategories: [
-                    { 
-                        id: "algebra",
-                        title: "代数", 
-                        icon: "fas fa-superscript",
-                        articles: [
-                            {
-                                id: "quadratic",
-                                title: "二次方程解法",
-                                content: `<h3>二次方程的一般形式</h3>
-                                <p>ax² + bx + c = 0 (a ≠ 0)</p>
-                                
-                                <h3>求解方法</h3>
-                                <p><strong>因式分解法</strong>：适用于可因式分解的方程</p>
-                                <p>例：x² - 5x + 6 = 0 → (x-2)(x-3)=0 → x=2 或 x=3</p>
-                                
-                                <p><strong>配方法</strong>：将方程化为完全平方形式</p>
-                                <p>例：x² + 6x + 5 = 0 → (x+3)² - 4 = 0 → (x+3)²=4 → x=-1 或 x=-5</p>
-                                
-                                <p><strong>公式法</strong>：使用求根公式</p>
-                                <p>x = [-b ± √(b² - 4ac)] / (2a)</p>
-                                <p>例：2x² + 5x - 3 = 0 → x = [-5 ± √(25+24)]/4 → x=0.5 或 x=-3</p>`
-                            }
-                        ]
-                    }
-                ]
-            },
-            others: {
-                title: "其他学科",
-                description: "科学、历史、艺术等拓展知识",
-                iconClass: "fas fa-atom",
-                subcategories: [
-                    { 
-                        id: "science",
-                        title: "科学", 
-                        icon: "fas fa-flask",
-                        articles: [
-                            {
-                                id: "physics",
-                                title: "基础物理概念",
-                                content: `<h3>牛顿运动定律</h3>
-                                <p><strong>第一定律（惯性定律）</strong>：物体在不受外力作用时，保持静止或匀速直线运动状态</p>
-                                <p><strong>第二定律</strong>：F=ma，力等于质量乘以加速度</p>
-                                <p><strong>第三定律（作用与反作用）</strong>：两个物体之间的作用力和反作用力总是大小相等，方向相反</p>
-                                
-                                <h3>能量守恒定律</h3>
-                                <p>在一个封闭系统中，能量既不会凭空产生，也不会凭空消失，它只会从一种形式转化为另一种形式，或者从一个物体转移到其它物体，而能量的总量保持不变。</p>`
-                            }
-                        ]
-                    }
-                ]
-            }
-        };
+        let contentData = {};
+        let contentSHA = null; // 存储文件SHA，用于更新操作
 
         // 当前状态
         let currentState = {
@@ -977,11 +840,173 @@
             document.getElementById('githubBranch').value = githubConfig.branch || 'main';
             updateGithubStatus();
             
-            // 生成分类卡片
-            generateCategoryCards();
+            // 尝试从localStorage加载内容数据
+            const savedContent = localStorage.getItem('contentData');
+            if (savedContent) {
+                try {
+                    contentData = JSON.parse(savedContent);
+                    generateCategoryCards();
+                } catch (e) {
+                    console.error("解析内容数据失败:", e);
+                    // 如果解析失败，使用默认内容
+                    loadDefaultContent();
+                }
+            } else {
+                // 如果本地没有内容，加载默认内容
+                loadDefaultContent();
+            }
+            
             renderMessages();
         });
 
+        // 加载默认内容
+        function loadDefaultContent() {
+            contentData = {
+                chinese: {
+                    title: "中文学习",
+                    description: "经典课文解析、古诗词鉴赏与现代文阅读",
+                    iconClass: "fas fa-book-open",
+                    subcategories: [
+                        { 
+                            id: "kwwd",
+                            title: "课文问答", 
+                            icon: "fas fa-scroll",
+                            articles: [
+                                {
+                                    id: "tang_poetry",
+                                    title: "为学",
+                                    content: `<h3>为学</h3>
+                                    <ul>
+                                        <li><strong>「天下事有難易乎」（第1段）一句運用了甚麼修辭手法？</strong>：设问</li>
+                                    </ul>
+                                    
+                                    <h3>代表诗人及作品</h3>
+                                    <p><strong>李白</strong> - 被称为"诗仙"，代表作《静夜思》、《将进酒》等</p>
+                                    <p><strong>杜甫</strong> - 被誉为"诗圣"，代表作《春望》、《登高》等</p>
+                                    <p><strong>王维</strong> - 以山水田园诗著称，代表作《山居秋暝》、《鸟鸣涧》等</p>
+                                    
+                                    <h3>学习建议</h3>
+                                    <p>学习唐诗应注重理解诗歌的创作背景、诗人的生平经历以及诗歌中的意象运用。建议从短小精悍的五言绝句开始，逐步过渡到长篇古风。</p>`
+                                },
+                                {
+                                    id: "dream_red",
+                                    title: "《红楼梦》解析",
+                                    content: `<h3>《红楼梦》概述</h3>
+                                    <p>《红楼梦》是中国古典四大名著之一，作者曹雪芹。小说以贾、史、王、薛四大家族的兴衰为背景，以贾宝玉、林黛玉、薛宝钗的爱情婚姻悲剧为主线，描绘了封建社会的世态百相。</p>
+                                    
+                                    <h3>主要人物分析</h3>
+                                    <p><strong>贾宝玉</strong>：封建社会的叛逆者，厌恶功名利禄，崇尚自由</p>
+                                    <p><strong>林黛玉</strong>：才情横溢，多愁善感，具有强烈的自尊心</p>
+                                    <p><strong>薛宝钗</strong>：端庄稳重，深谙世故，是封建礼教的典范</p>
+                                    
+                                    <h3>艺术特色</h3>
+                                    <ul>
+                                        <li>宏大而精密的结构布局</li>
+                                        <li>丰富生动的人物形象（共975人）</li>
+                                        <li>精湛的语言艺术</li>
+                                        <li>深刻的主题思想</li>
+                                    </ul>`
+                                }
+                            ]
+                        }
+                    ]
+                },
+                english: {
+                    title: "英文学习",
+                    description: "语法、词汇、阅读与写作提升",
+                    iconClass: "fas fa-language",
+                    subcategories: [
+                        { 
+                            id: "grammar",
+                            title: "英语语法", 
+                            icon: "fas fa-spell-check",
+                            articles: [
+                                {
+                                    id: "tenses",
+                                    title: "英语时态详解",
+                                    content: `<h3>英语时态概览</h3>
+                                    <p>英语共有12种主要时态，分为4个时间（现在、过去、将来、过去将来）和4个状态（一般、进行、完成、完成进行）。</p>
+                                    
+                                    <h3>常用时态解析</h3>
+                                    <p><strong>一般现在时</strong>：表示经常性、习惯性的动作或状态</p>
+                                    <p>结构：主语 + 动词原形（第三人称单数加s）</p>
+                                    <p>例句：I work every day. She works in a hospital.</p>
+                                    
+                                    <p><strong>现在进行时</strong>：表示正在进行的动作</p>
+                                    <p>结构：am/is/are + 现在分词</p>
+                                    <p>例句：They are studying English now.</p>
+                                    
+                                    <p><strong>现在完成时</strong>：表示过去发生的动作对现在的影响</p>
+                                    <p>结构：have/has + 过去分词</p>
+                                    <p>例句：I have finished my homework.</p>`
+                                }
+                            ]
+                        }
+                    ]
+                },
+                math: {
+                    title: "数学",
+                    description: "代数、几何、微积分等数学知识",
+                    iconClass: "fas fa-calculator",
+                    subcategories: [
+                        { 
+                            id: "algebra",
+                            title: "代数", 
+                            icon: "fas fa-superscript",
+                            articles: [
+                                {
+                                    id: "quadratic",
+                                    title: "二次方程解法",
+                                    content: `<h3>二次方程的一般形式</h3>
+                                    <p>ax² + bx + c = 0 (a ≠ 0)</p>
+                                    
+                                    <h3>求解方法</h3>
+                                    <p><strong>因式分解法</strong>：适用于可因式分解的方程</p>
+                                    <p>例：x² - 5x + 6 = 0 → (x-2)(x-3)=0 → x=2 或 x=3</p>
+                                    
+                                    <p><strong>配方法</strong>：将方程化为完全平方形式</p>
+                                    <p>例：x² + 6x + 5 = 0 → (x+3)² - 4 = 0 → (x+3)²=4 → x=-1 或 x=-5</p>
+                                    
+                                    <p><strong>公式法</strong>：使用求根公式</p>
+                                    <p>x = [-b ± √(b² - 4ac)] / (2a)</p>
+                                    <p>例：2x² + 5x - 3 = 0 → x = [-5 ± √(25+24)]/4 → x=0.5 或 x=-3</p>`
+                                }
+                            ]
+                        }
+                    ]
+                },
+                others: {
+                    title: "其他学科",
+                    description: "科学、历史、艺术等拓展知识",
+                    iconClass: "fas fa-atom",
+                    subcategories: [
+                        { 
+                            id: "science",
+                            title: "科学", 
+                            icon: "fas fa-flask",
+                            articles: [
+                                {
+                                    id: "physics",
+                                    title: "基础物理概念",
+                                    content: `<h3>牛顿运动定律</h3>
+                                    <p><strong>第一定律（惯性定律）</strong>：物体在不受外力作用时，保持静止或匀速直线运动状态</p>
+                                    <p><strong>第二定律</strong>：F=ma，力等于质量乘以加速度</p>
+                                    <p><strong>第三定律（作用与反作用）</strong>：两个物体之间的作用力和反作用力总是大小相等，方向相反</p>
+                                    
+                                    <h3>能量守恒定律</h3>
+                                    <p>在一个封闭系统中，能量既不会凭空产生，也不会凭空消失，它只会从一种形式转化为另一种形式，或者从一个物体转移到其它物体，而能量的总量保持不变。</p>`
+                                }
+                            ]
+                        }
+                    ]
+                }
+            };
+            
+            // 保存默认内容到localStorage
+            localStorage.setItem('contentData', JSON.stringify(contentData));
+            generateCategoryCards();
+        }
+        
         // 保存GitHub配置
         function saveGithubConfig() {
             githubConfig.token = document.getElementById('githubToken').value.trim();
@@ -1031,28 +1056,75 @@
             syncBtn.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> 同步中...`;
             syncBtn.disabled = true;
             
-            // 模拟API请求延迟
-            setTimeout(() => {
-                // 在实际应用中，这里会从GitHub获取最新的contentData
-                // 以下是模拟更新
-                showNotification('内容已从GitHub同步成功！');
-                
-                // 重新生成分类卡片
-                generateCategoryCards();
-                
-                // 如果当前正在查看文章，刷新文章内容
-                if (currentState.article) {
-                    showArticle(currentState.category, currentState.subcategory, currentState.article);
+            // 获取GitHub仓库内容
+            fetchContentFromGitHub()
+                .then(data => {
+                    if (data) {
+                        // 更新本地内容
+                        contentData = data.content;
+                        contentSHA = data.sha;
+                        
+                        // 保存到localStorage
+                        localStorage.setItem('contentData', JSON.stringify(contentData));
+                        
+                        // 重新生成分类卡片
+                        generateCategoryCards();
+                        
+                        // 如果当前正在查看文章，刷新文章内容
+                        if (currentState.article) {
+                            showArticle(currentState.category, currentState.subcategory, currentState.article);
+                        }
+                        
+                        showNotification('内容已从GitHub同步成功！');
+                    } else {
+                        showNotification('从GitHub获取内容失败');
+                    }
+                })
+                .catch(error => {
+                    console.error('同步失败:', error);
+                    showNotification('同步失败: ' + error.message);
+                })
+                .finally(() => {
+                    // 恢复按钮状态
+                    syncBtn.innerHTML = `<i class="fas fa-sync-alt"></i> 同步内容`;
+                    syncBtn.disabled = false;
+                });
+        }
+        
+        // 从GitHub获取内容
+        async function fetchContentFromGitHub() {
+            const [owner, repo] = githubConfig.repo.split('/');
+            if (!owner || !repo) {
+                throw new Error('仓库名称格式错误');
+            }
+            
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/content.json?ref=${githubConfig.branch}`;
+            
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `token ${githubConfig.token}`,
+                    'Accept': 'application/vnd.github.v3+json'
                 }
-                
-                // 恢复按钮状态
-                syncBtn.innerHTML = `<i class="fas fa-sync-alt"></i> 从GitHub同步内容`;
-                syncBtn.disabled = false;
-            }, 2000);
+            });
+            
+            if (!response.ok) {
+                if (response.status === 404) {
+                    showNotification('仓库中未找到内容文件，将使用本地内容');
+                    return null;
+                }
+                throw new Error(`GitHub API错误: ${response.status} ${response.statusText}`);
+            }
+            
+            const data = await response.json();
+            const content = atob(data.content.replace(/\s/g, ''));
+            return {
+                content: JSON.parse(content),
+                sha: data.sha
+            };
         }
         
         // 保存内容到GitHub
-        function saveToGitHub() {
+        async function saveToGitHub() {
             if (!githubConfig.token || !githubConfig.repo) {
                 showNotification('请先配置GitHub信息！');
                 return;
@@ -1062,20 +1134,58 @@
             saveBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> 保存中...`;
             saveBtn.disabled = true;
             
-            // 模拟API请求延迟
-            setTimeout(() => {
-                showNotification('内容已保存到GitHub！其他设备刷新后即可看到更新。');
+            try {
+                // 获取最新SHA（如果之前未获取）
+                if (!contentSHA) {
+                    const data = await fetchContentFromGitHub();
+                    if (data) contentSHA = data.sha;
+                }
+                
+                const [owner, repo] = githubConfig.repo.split('/');
+                if (!owner || !repo) {
+                    throw new Error('仓库名称格式错误');
+                }
+                
+                const url = `https://api.github.com/repos/${owner}/${repo}/contents/content.json`;
+                
+                // 准备要上传的内容
+                const content = JSON.stringify(contentData, null, 2);
+                const contentBase64 = btoa(unescape(encodeURIComponent(content)));
+                
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: '更新学习内容',
+                        content: contentBase64,
+                        sha: contentSHA,
+                        branch: githubConfig.branch
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`保存失败: ${response.status} ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                contentSHA = result.content.sha; // 更新SHA值
+                
+                showNotification('内容已成功保存到GitHub！');
                 
                 // 退出编辑模式
                 exitEditMode();
-                
+            } catch (error) {
+                console.error('保存到GitHub失败:', error);
+                showNotification('保存失败: ' + error.message);
+            } finally {
                 // 恢复按钮状态
                 saveBtn.innerHTML = `<i class="fas fa-save"></i> 保存`;
                 saveBtn.disabled = false;
-                
-                // 重新显示文章以刷新内容
-                showArticle(currentState.category, currentState.subcategory, currentState.article);
-            }, 1500);
+            }
         }
 
         // 生成分类卡片
@@ -1220,6 +1330,9 @@
             const subcategory = category.subcategories.find(sub => sub.id === currentState.subcategory);
             const article = subcategory.articles.find(art => art.id === currentState.article);
             article.content = newContent;
+            
+            // 更新本地存储
+            localStorage.setItem('contentData', JSON.stringify(contentData));
             
             // 保存到GitHub
             saveToGitHub();
