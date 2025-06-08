@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub同步学习平台</title>
+    <title>made by 16</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 保持原有样式不变 */
@@ -811,6 +811,33 @@
     </div>
 
     <script>
+        // 解决Base64中文乱码问题的辅助函数
+        function decodeBase64(str) {
+            // 移除所有空白字符
+            const base64 = str.replace(/\s/g, '');
+            // 将Base64转换为二进制字符串
+            const binaryString = atob(base64);
+            // 将二进制字符串转换为UTF-8编码的字符串
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return new TextDecoder('utf-8').decode(bytes);
+        }
+
+        function encodeBase64(str) {
+            // 将字符串编码为UTF-8字节数组
+            const encoder = new TextEncoder();
+            const data = encoder.encode(str);
+            // 将字节数组转换为二进制字符串
+            let binary = '';
+            for (let i = 0; i < data.length; i++) {
+                binary += String.fromCharCode(data[i]);
+            }
+            // 将二进制字符串编码为Base64
+            return btoa(binary);
+        }
+
         // 初始内容数据
         let contentData = {};
         let contentSHA = null; // 存储文件SHA，用于更新操作
@@ -1116,9 +1143,9 @@
             }
             
             const data = await response.json();
-            const content = atob(data.content.replace(/\s/g, ''));
+            const decodedContent = decodeBase64(data.content);
             return {
-                content: JSON.parse(content),
+                content: JSON.parse(decodedContent),
                 sha: data.sha
             };
         }
@@ -1150,7 +1177,7 @@
                 
                 // 准备要上传的内容
                 const content = JSON.stringify(contentData, null, 2);
-                const contentBase64 = btoa(unescape(encodeURIComponent(content)));
+                const contentBase64 = encodeBase64(content);
                 
                 const response = await fetch(url, {
                     method: 'PUT',
