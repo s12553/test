@@ -16,16 +16,21 @@
           },
           {
             "id": "dream_red",
-            "title": "《红楼梦》解析",
+            "title": "卖柑者言",
             "content": "<h3>卖柑者言</h3>\n                                    <ul>\n                                        <li>宏大而精密的结构布局</li>\n                                        <li>丰富生动的人物形象（共975人）</li>\n                                        <li>精湛的语言艺术</li>\n                                        <li>深刻的主题思想</li>\n                                    </ul>"
+          }, 
+          {
+            "id": "mgzy",
+            "title": "说勤",
+            "content": "<h3>说勤</h3>\n                                    <ul>\n                                        <li>宏大而精密的结构布局</li>\n                                        <li>丰富生动的人物形象（共975人）</li>\n                                        <li>精湛的语言艺术</li>\n                                        <li>深刻的主题思想</li>\n                                    </ul>"
           }
         ]
       }
     ]
   },
   "english": {
-    "title": "英文学习",
-    "description": "语法、词汇、阅读与写作提升",
+    "title": "英文",
+    "description": "英语",
     "iconClass": "fas fa-language",
     "subcategories": [
       {
@@ -44,7 +49,7 @@
   },
   "math": {
     "title": "数学",
-    "description": "代数、几何、微积分等数学知识",
+    "description": "数学",
     "iconClass": "fas fa-calculator",
     "subcategories": [
       {
@@ -62,8 +67,8 @@
     ]
   },
   "others": {
-    "title": "其他学科",
-    "description": "科学、历史、艺术等拓展知识",
+    "title": "副科",
+    "description": "副科",
     "iconClass": "fas fa-atom",
     "subcategories": [
       {
