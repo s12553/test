@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>made by 16</title>
+    <title>made by 16 - 多设备留言同步</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 保持原有样式不变 */
@@ -683,6 +683,31 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        .message-sync-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .message-sync-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .message-sync-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
 
         @keyframes spin {
             from { transform: rotate(0deg); }
@@ -719,6 +744,10 @@
             .github-config {
                 padding: 10px;
             }
+            
+            .message-sync-controls {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -726,10 +755,10 @@
     <header>
         <div class="container">
             <h1>made by 废物16</h1>
-            <p class="subtitle">1.2.3</p>
+            <p class="subtitle">多设备留言同步 v1.0</p>
             
             <div class="github-config">
-                <h3><i class="fab fa-github"></i> 配置</h3>
+                <h3><i class="fab fa-github"></i> GitHub 配置</h3>
                 <input type="text" id="githubToken" placeholder="访问令牌">
                 <input type="text" id="githubRepo" placeholder="用户名/仓库名">
                 <input type="text" id="githubBranch" placeholder="分支名称" value="main">
@@ -739,8 +768,8 @@
                     <i class="fas fa-circle"></i> <span>未连接GitHub</span>
                 </div>
                 
-                <button class="sync-btn" onclick="syncWithGitHub()">
-                    <i class="fas fa-sync-alt"></i> 同步内容
+                <button class="sync-btn" onclick="syncAllData()">
+                    <i class="fas fa-sync-alt"></i> 同步所有数据
                 </button>
             </div>
         </div>
@@ -764,9 +793,9 @@
                 <div class="ai-icon">
                     <i class="fas fa-robot"></i>
                 </div>
-                <h2 class="ai-title">不修</h2>
+                <h2 class="ai-title">AI 学习助手</h2>
             </div>
-            <p>滚</p>
+            <p>输入您的问题，获取学习建议</p>
             
             <div class="ai-prompt">
                 <input type="text" class="ai-input" id="aiQuestion" placeholder="输入您的问题，例如：如何提高英语写作水平？">
@@ -780,7 +809,18 @@
         
         <!-- 留言板部分 -->
         <div class="message-board">
-            <h2><i class="fas fa-comments"></i> 不修</h2>
+            <h2><i class="fas fa-comments"></i> 多设备留言板</h2>
+            <p>所有留言将通过 GitHub 仓库同步，在不同设备上都能看到相同的留言</p>
+            
+            <div class="message-sync-controls">
+                <button class="message-sync-btn" onclick="syncMessages()">
+                    <i class="fas fa-sync-alt"></i> 同步留言
+                </button>
+                <button class="message-sync-btn" onclick="clearLocalMessages()">
+                    <i class="fas fa-trash-alt"></i> 清除本地缓存
+                </button>
+            </div>
+            
             <div class="message-form">
                 <div class="form-group">
                     <label for="messageName">昵称</label>
@@ -800,8 +840,9 @@
         </div>
         
         <p class="footer-note">
-            不知道写什么<br>
-            当前内容文件：<span id="currentDataFiles">content.json</span>
+            多设备留言同步功能已启用<br>
+            当前内容文件：<span id="currentDataFiles">content.json</span><br>
+            留言数据文件：<span id="messagesDataFile">messages.json</span>
         </p>
     </div>
 
@@ -841,6 +882,7 @@
         // 初始内容数据
         let contentData = {};
         let contentSHA = null; // 存储文件SHA，用于更新操作
+        let messagesSHA = null; // 存储留言文件的SHA
 
         // 当前状态
         let currentState = {
@@ -867,6 +909,9 @@
             document.getElementById('githubBranch').value = githubConfig.branch || 'main';
             updateGithubStatus();
             
+            // 更新数据文件显示
+            document.getElementById('messagesDataFile').textContent = 'messages.json';
+            
             // 尝试从localStorage加载内容数据
             const savedContent = localStorage.getItem('contentData');
             if (savedContent) {
@@ -883,7 +928,8 @@
                 loadDefaultContent();
             }
             
-            renderMessages();
+            // 加载留言数据
+            loadMessages();
         });
 
         // 加载默认内容
@@ -1063,8 +1109,8 @@
             }, 3000);
         }
         
-        // 从GitHub同步内容
-        function syncWithGitHub() {
+        // 同步所有数据
+        function syncAllData() {
             if (!githubConfig.token || !githubConfig.repo) {
                 showNotification('请先配置GitHub信息！');
                 return;
@@ -1098,13 +1144,20 @@
                         showNotification('从GitHub获取内容失败');
                     }
                 })
+                .then(() => {
+                    // 同步留言数据
+                    return fetchMessagesFromGitHub();
+                })
+                .then(() => {
+                    // 恢复按钮状态
+                    syncBtn.innerHTML = `<i class="fas fa-sync-alt"></i> 同步所有数据`;
+                    syncBtn.disabled = false;
+                })
                 .catch(error => {
                     console.error('同步失败:', error);
                     showNotification('同步失败: ' + error.message);
-                })
-                .finally(() => {
                     // 恢复按钮状态
-                    syncBtn.innerHTML = `<i class="fas fa-sync-alt"></i> 同步内容`;
+                    syncBtn.innerHTML = `<i class="fas fa-sync-alt"></i> 同步所有数据`;
                     syncBtn.disabled = false;
                 });
         }
@@ -1414,7 +1467,170 @@
             }, 1500);
         }
 
-        // 留言板功能
+        // ==================== 留言板同步功能 ====================
+        
+        // 加载留言数据
+        function loadMessages() {
+            // 尝试从本地存储加载
+            const savedMessages = localStorage.getItem('messages');
+            if (savedMessages) {
+                messages = JSON.parse(savedMessages);
+                renderMessages();
+            }
+            
+            // 如果配置了GitHub，尝试从GitHub加载
+            if (githubConfig.token && githubConfig.repo) {
+                fetchMessagesFromGitHub();
+            }
+        }
+        
+        // 从GitHub获取留言数据
+        async function fetchMessagesFromGitHub() {
+            if (!githubConfig.token || !githubConfig.repo) {
+                showNotification('请先配置GitHub信息！');
+                return;
+            }
+            
+            const [owner, repo] = githubConfig.repo.split('/');
+            if (!owner || !repo) {
+                throw new Error('仓库名称格式错误');
+            }
+            
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/messages.json?ref=${githubConfig.branch}`;
+            
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        // 如果文件不存在，创建新文件
+                        showNotification('未找到留言文件，将创建新文件');
+                        return;
+                    }
+                    throw new Error(`GitHub API错误: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                const decodedContent = decodeBase64(data.content);
+                const remoteMessages = JSON.parse(decodedContent);
+                
+                // 合并本地和远程留言（保留最新的）
+                messages = mergeMessages(messages, remoteMessages);
+                
+                // 保存到本地存储
+                localStorage.setItem('messages', JSON.stringify(messages));
+                
+                // 更新SHA
+                messagesSHA = data.sha;
+                
+                // 渲染留言
+                renderMessages();
+                
+                showNotification('留言已从GitHub同步成功！');
+            } catch (error) {
+                console.error('获取留言失败:', error);
+                showNotification('获取留言失败: ' + error.message);
+            }
+        }
+        
+        // 合并留言数据（保留最新的）
+        function mergeMessages(local, remote) {
+            const merged = [...local, ...remote];
+            
+            // 移除重复留言（基于ID）
+            const uniqueMap = new Map();
+            merged.forEach(msg => {
+                if (!uniqueMap.has(msg.id) || uniqueMap.get(msg.id).timestamp < msg.timestamp) {
+                    uniqueMap.set(msg.id, msg);
+                }
+            });
+            
+            // 按时间倒序排序
+            return Array.from(uniqueMap.values()).sort((a, b) => 
+                new Date(b.timestamp) - new Date(a.timestamp)
+            );
+        }
+        
+        // 同步留言
+        function syncMessages() {
+            if (!githubConfig.token || !githubConfig.repo) {
+                showNotification('请先配置GitHub信息！');
+                return;
+            }
+            
+            fetchMessagesFromGitHub();
+        }
+        
+        // 保存留言到GitHub
+        async function saveMessagesToGitHub() {
+            if (!githubConfig.token || !githubConfig.repo) {
+                showNotification('请先配置GitHub信息！');
+                return;
+            }
+            
+            const [owner, repo] = githubConfig.repo.split('/');
+            if (!owner || !repo) {
+                throw new Error('仓库名称格式错误');
+            }
+            
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/messages.json`;
+            
+            // 准备要上传的内容
+            const messagesContent = JSON.stringify(messages, null, 2);
+            const contentBase64 = encodeBase64(messagesContent);
+            
+            const body = {
+                message: '更新留言板数据',
+                content: contentBase64,
+                branch: githubConfig.branch
+            };
+            
+            // 如果已有SHA，添加SHA参数
+            if (messagesSHA) {
+                body.sha = messagesSHA;
+            }
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`保存留言失败: ${response.status} ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                messagesSHA = result.content.sha; // 更新SHA值
+                
+                showNotification('留言已成功保存到GitHub！');
+            } catch (error) {
+                console.error('保存留言到GitHub失败:', error);
+                showNotification('保存留言失败: ' + error.message);
+            }
+        }
+        
+        // 清除本地缓存
+        function clearLocalMessages() {
+            if (confirm('确定要清除所有本地留言缓存吗？此操作不会影响GitHub上的数据。')) {
+                localStorage.removeItem('messages');
+                messages = [];
+                renderMessages();
+                showNotification('本地留言缓存已清除');
+            }
+        }
+        
+        // 提交新留言
         function submitMessage() {
             const nameInput = document.getElementById('messageName');
             const contentInput = document.getElementById('messageContent');
@@ -1454,10 +1670,14 @@
             // 重新渲染消息列表
             renderMessages();
             
+            // 保存到GitHub
+            saveMessagesToGitHub();
+            
             // 显示成功提示
             showNotification('留言提交成功！');
         }
         
+        // 渲染留言
         function renderMessages() {
             const messageList = document.getElementById('messageList');
             
@@ -1498,20 +1718,28 @@
             });
         }
         
+        // 点赞留言
         function likeMessage(id) {
             const messageIndex = messages.findIndex(msg => msg.id === id);
             if (messageIndex !== -1) {
                 messages[messageIndex].likes++;
                 localStorage.setItem('messages', JSON.stringify(messages));
                 renderMessages();
+                
+                // 保存到GitHub
+                saveMessagesToGitHub();
             }
         }
         
+        // 删除留言
         function deleteMessage(id) {
-            if (confirm('确定要删除这条留言吗？')) {
+            if (confirm('确定要删除这条留言吗？此操作会同步到所有设备')) {
                 messages = messages.filter(msg => msg.id !== id);
                 localStorage.setItem('messages', JSON.stringify(messages));
                 renderMessages();
+                
+                // 保存到GitHub
+                saveMessagesToGitHub();
             }
         }
     </script>
