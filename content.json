@@ -36,7 +36,12 @@
       {
         "id": "dc",
         "title": "单词",
-        "content": "<h3>单词</h3>"
+        "articles": [
+          {
+            "id": "dbk",
+            "title": "第八课",
+            "content": "<h3>单词</h3>"
+          }
       },
       {
         "id": "grammar",
