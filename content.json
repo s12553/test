@@ -41,7 +41,7 @@
           {
             "id": "dbk",
             "title": "第八课",
-            "content": "<h3>单词</h3>\n<ul>\n\n</ul>\n\n<li><strong>affordable</strong>：可负担的</li> \n<li><strong>critical</strong>：至关重要的</li> \n<li><strong>distinguished</strong>：杰出的</li>\n<li><strong>exceptional</strong>：不同反响的</li>\n<li><strong>exemplary</strong>：可作为典范的</li>\n<li><strong>extraordinary</strong>：非凡的；意想不到的</li>"
+            "content": "<h3>单词</h3>\n<ul>\n\n</ul>\n\n<li><strong>affordable</strong>：可负担的</li> \n<li><strong>critical</strong>：至关重要的</li> \n<li><strong>distinguished</strong>：杰出的</li>\n<li><strong>exceptional</strong>：不同反响的</li>\n<li><strong>exemplary</strong>：可作为典范的</li>"
           }
         ]
       },
@@ -72,7 +72,7 @@
           {
             "id": "quadratic",
             "title": "二次方程解法",
-            "content": "<h3>二次方程的一般形式</h3>\n                                    <p>ax² + bx + c = 0 (a ≠ 0)</p>\n                                    \n                                    <h3>求解方法</h3>\n                                    <p><strong>因式分解法</strong>：适用于可因式分解的方程</p>\n                                    <p>例：x² - 5x + 6 = 0 → (x-2)(x-3)=0 → x=2 或 x=3</p>\n                                    \n                                    <p><strong>配方法</strong>：将方程化为完全平方形式</p>\n                                    <p>例：x² + 6x + 5 = 0 → (x+3)² - 4 = 0 → (x+3)²=4 → x=-1 或 x=-5</p>\n                                    \n                                    <p><strong>公式法</strong>：使用求根公式</p>\n                                    <p>x = [-b ± √(b² - 4ac)] / (2a)</p>\n                                    <p>例：2x² + 5x - 3 = 0 → x = [-5 ± √(25+24)]/4 → x=0.5 或 x=-3</p>"
+            "content": "<h3>二次方程的一般形式</h3>"
           }
         ]
       }
@@ -94,7 +94,17 @@
             "content": "<h3>牛顿运动定律</h3>\n                                    <p><strong>第一定律（惯性定律）</strong>：物体在不受外力作用时，保持静止或匀速直线运动状态</p>\n                                    <p><strong>第二定律</strong>：F=ma，力等于质量乘以加速度</p>\n                                    <p><strong>第三定律（作用与反作用）</strong>：两个物体之间的作用力和反作用力总是大小相等，方向相反</p>\n                                    \n                                    <h3>能量守恒定律</h3>\n                                    <p>在一个封闭系统中，能量既不会凭空产生，也不会凭空消失，它只会从一种形式转化为另一种形式，或者从一个物体转移到其它物体，而能量的总量保持不变。</p>"
           }
         ]
-      }
-    ]
-  }
+        "id": "dl",
+        "title": "地理",
+        "icon": "fas fa-flask",
+        "articles": [
+          {
+          "id": "qh",
+          "title": "气候",
+          "content": "<h3>气候</h3>"  
+        }
+      ]
+    }
+  ]
+}
 }
