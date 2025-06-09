@@ -1,7 +1,7 @@
 {
   "chinese": {
-    "title": "中文学习",
-    "description": "经典课文解析、古诗词鉴赏与现代文阅读",
+    "title": "中文",
+    "description": "中文",
     "iconClass": "fas fa-book-open",
     "subcategories": [
       {
