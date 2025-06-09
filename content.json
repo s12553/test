@@ -34,8 +34,13 @@
     "iconClass": "fas fa-language",
     "subcategories": [
       {
+        "id": "dc",
+        "title": "单词",
+        "content": "<h3>单词</h3>"
+      },
+      {
         "id": "grammar",
-        "title": "英语语法",
+        "title": "语法",
         "icon": "fas fa-spell-check",
         "articles": [
           {
