@@ -36,6 +36,7 @@
       {
         "id": "dc",
         "title": "单词",
+        "iconClass": "fas fa-book-open",
         "articles": [
           {
             "id": "dbk",
