@@ -99,12 +99,12 @@
         "icon": "fas fa-flask",
         "articles": [
           {
-          "id": "qh",
-          "title": "气候",
-          "content": "<h3>气候</h3>"  
-        }
-      ]
-    }
-  ]
-}
+            "id": "qh",
+            "title": "气候",
+            "content": "<h3>气候</h3>"  
+          }
+        ]
+      }
+    ]
+  }
 }
