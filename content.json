@@ -52,8 +52,8 @@
         "articles": [
           {
             "id": "tenses",
-            "title": "英语时态详解",
-            "content": "<h3>英语时态概览</h3>\n                                    <p>英语共有12种主要时态，分为4个时间（现在、过去、将来、过去将来）和4个状态（一般、进行、完成、完成进行）。</p>\n                                    \n                                    <h3>常用时态解析</h3>\n                                    <p><strong>一般现在时</strong>：表示经常性、习惯性的动作或状态</p>\n                                    <p>结构：主语 + 动词原形（第三人称单数加s）</p>\n                                    <p>例句：I work every day. She works in a hospital.</p>\n                                    \n                                    <p><strong>现在进行时</strong>：表示正在进行的动作</p>\n                                    <p>结构：am/is/are + 现在分词</p>\n                                    <p>例句：They are studying English now.</p>\n                                    \n                                    <p><strong>现在完成时</strong>：表示过去发生的动作对现在的影响</p>\n                                    <p>结构：have/has + 过去分词</p>\n                                    <p>例句：I have finished my homework.</p>"
+            "title": "陈述语气",
+            "content": "<h3>reporting speach</h3>\n                                    <p>英语共有12种主要时态，分为4个时间（现在、过去、将来、过去将来）和4个状态（一般、进行、完成、完成进行）。</p>\n                                    \n                                    <h3>常用时态解析</h3>\n                                    <p><strong>一般现在时</strong>：表示经常性、习惯性的动作或状态</p>\n                                    <p>结构：主语 + 动词原形（第三人称单数加s）</p>\n                                    <p>例句：I work every day. She works in a hospital.</p>\n                                    \n                                    <p><strong>现在进行时</strong>：表示正在进行的动作</p>\n                                    <p>结构：am/is/are + 现在分词</p>\n                                    <p>例句：They are studying English now.</p>\n                                    \n                                    <p><strong>现在完成时</strong>：表示过去发生的动作对现在的影响</p>\n                                    <p>结构：have/has + 过去分词</p>\n                                    <p>例句：I have finished my homework.</p>"
           }
         ]
       }
