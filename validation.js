@@ -4,7 +4,7 @@ function validateForm(event) {
 
     if (password === "AngerAndHowlingNoOneKnowsForSure") { // 验证密码是否正确
         alert("✅ ");
-        document.getElementById("overlay").style.cssText = "display: none !important;"; // 隐藏覆盖层
+        document.getElementById("overlay").style.cssText = "display: hidden !important;"; // 隐藏覆盖层
     } else {
         alert("❌ ");
     }
