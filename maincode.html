@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head> 
+    <title>表单验证</title>
+    <script src="validation.js"></script>
+    <form onsubmit="validateForm(event)">
+        <label for="password">请输入密码：</label>
+        <input type="password" id="password" required>
+        <button type="submit">提交</button>
+    </form>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>made by 16 </title>
