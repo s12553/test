@@ -1146,7 +1146,7 @@
                 })
                 .then(() => {
                     // 同步留言数据
-                    return fetchMessagesFromGitHub();
+                    showNotification(fetchMessagesFromGitHub());
                 })
                 .then(() => {
                     // 恢复按钮状态
