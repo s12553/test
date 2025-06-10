@@ -754,7 +754,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>made by 废物16</h1>
+            <h1>made by 16</h1>
             <p class="subtitle">114514</p>
             
             <div class="github-config">
@@ -929,7 +929,7 @@
             }
             
             // 加载留言数据
-            loadMessages();
+            showNotification(loadMessages());
         });
 
         // 加载默认内容
@@ -1146,7 +1146,7 @@
                 })
                 .then(() => {
                     // 同步留言数据
-                    showNotification(fetchMessagesFromGitHub());
+                    return fetchMessagesFromGitHub();
                 })
                 .then(() => {
                     // 恢复按钮状态
