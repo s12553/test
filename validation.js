@@ -3,9 +3,9 @@ function validateForm(event) {
     const password = document.getElementById("password").value;
 
     if (password === "123456") { // 验证密码是否正确
-        alert("✅ ");
-        document.getElementById("overlay").style.visibility = "hidden"; // 隐藏覆盖层
+        alert("✅ 验证成功！");
+        document.getElementById("overlay").style.display = "none"; // 隐藏覆盖层
     } else {
-        alert("❌ ");
+        alert("❌ 密码错误，请重试！");
     }
 }
