@@ -1442,7 +1442,7 @@
             articleBody.innerHTML = `
                 <div class="edit-mode">
                     <h3><i class="fas fa-edit"></i> 编辑文章内容</h3>
-                    <p>您可以修改以下内容，保存后将通过GitHub同步到其他设备</p>
+                    <p>你可以修改以下内容，保存后将通过GitHub同步到其他设备</p>
                     
                     <textarea class="edit-textarea" id="articleEditor">${article.content}</textarea>
                     
@@ -1491,13 +1491,13 @@
         function searchArticles() {
             const query = document.getElementById('searchQuery').value.trim();
             if (!query) {
-                showNotification('请输入搜索关键词');
+                showNotification('输入东西');
                 return;
             }
             
             const resultsContainer = document.getElementById('searchResults');
             resultsContainer.style.display = 'block';
-            resultsContainer.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> 正在搜索...</p>';
+            resultsContainer.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> 等下</p>';
             
             // 模拟搜索延迟
             setTimeout(() => {
@@ -1547,15 +1547,15 @@
                 resultsContainer.innerHTML = `
                     <div class="no-results">
                         <i class="fas fa-search"></i>
-                        <p>未找到包含 "${query}" 的文章</p>
-                        <p>请尝试其他关键词</p>
+                        <p>没找到包含 "${query}" 的文章</p>
+                        <p>输入别的</p>
                     </div>
                 `;
                 return;
             }
             
             let html = `<div class="search-results-header">
-                <p>找到 <strong>${results.length}</strong> 个相关结果：</p>
+                <p>找到 <strong>${results.length}</strong> 个东西：</p>
             </div>`;
             
             results.forEach(result => {
