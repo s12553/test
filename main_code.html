@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head> 
-    <title>sb</title>
-   
-
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>made by 16 </title>
+    <title>学习资源平台</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 保持原有样式不变 */
@@ -29,6 +25,7 @@
             --gray: #6c757d;
             --light-gray: #e9ecef;
             --edit-color: #ffd166;
+            --search-highlight: #fff9c4;
         }
 
         body {
@@ -130,6 +127,153 @@
         .github-config button:hover {
             background: var(--light-gray);
             transform: translateY(-2px);
+        }
+        
+        /* 留言板样式 */
+        .message-board {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+            border: 1px solid #e0e8ff;
+        }
+
+        .message-board h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-board h2 i {
+            color: var(--accent);
+        }
+
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .message-input, .message-textarea {
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .message-input:focus, .message-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .message-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .message-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 150px;
+        }
+
+        .message-submit:hover {
+            background: var(--secondary);
+        }
+
+        .message-list {
+            margin-top: 30px;
+        }
+
+        .message-item {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            border-left: 4px solid var(--accent);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .message-author {
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .message-time {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .message-content {
+            line-height: 1.6;
+            padding: 10px 0;
+        }
+
+        .message-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .message-action {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .message-action:hover {
+            color: var(--primary);
+        }
+
+        .no-messages {
+            text-align: center;
+            padding: 30px;
+            color: var(--gray);
+            font-style: italic;
         }
 
         .categories {
@@ -311,7 +455,8 @@
             margin-bottom: 8px;
         }
 
-        .ai-section {
+        /* 搜索部分样式 */
+        .search-section {
             background: white;
             border-radius: 15px;
             padding: 25px;
@@ -321,14 +466,14 @@
             border: 1px solid #e0e8ff;
         }
 
-        .ai-header {
+        .search-header {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
         }
 
-        .ai-icon {
+        .search-icon {
             background: linear-gradient(to right, var(--accent), var(--primary));
             width: 50px;
             height: 50px;
@@ -340,18 +485,18 @@
             font-size: 1.5rem;
         }
 
-        .ai-title {
+        .search-title {
             font-size: 1.5rem;
             color: var(--dark);
         }
 
-        .ai-prompt {
+        .search-prompt {
             display: flex;
             gap: 10px;
             margin-top: 15px;
         }
 
-        .ai-input {
+        .search-input {
             flex: 1;
             padding: 12px 15px;
             border: 2px solid var(--light-gray);
@@ -360,13 +505,13 @@
             transition: border-color 0.3s;
         }
 
-        .ai-input:focus {
+        .search-input:focus {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
-        .ai-submit {
+        .search-submit {
             background: var(--primary);
             color: white;
             border: none;
@@ -381,162 +526,67 @@
             gap: 8px;
         }
 
-        .ai-submit:hover {
+        .search-submit:hover {
             background: var(--secondary);
         }
 
-        .ai-response {
+        .search-results {
             margin-top: 20px;
             padding: 20px;
             background: var(--light-gray);
             border-radius: 10px;
-            min-height: 100px;
             display: none;
             border-left: 4px solid var(--accent);
         }
 
-        .message-board {
+        .search-result-item {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-            border: 1px solid #e0e8ff;
-        }
-
-        .message-board h2 {
-            color: var(--secondary);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .message-board h2 i {
-            color: var(--accent);
-        }
-
-        .message-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .message-input, .message-textarea {
-            padding: 12px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .message-input:focus, .message-textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-
-        .message-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .message-submit {
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 25px;
-            font-weight: 600;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 150px;
         }
 
-        .message-submit:hover {
-            background: var(--secondary);
-        }
-
-        .message-list {
-            margin-top: 30px;
-        }
-
-        .message-item {
-            background: var(--light);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            position: relative;
+        .search-result-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             border-left: 4px solid var(--accent);
         }
 
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .message-author {
-            font-weight: 600;
+        .result-title {
+            font-size: 1.2rem;
             color: var(--secondary);
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .message-time {
-            font-size: 0.85rem;
-            color: var(--gray);
-        }
-
-        .message-content {
-            line-height: 1.6;
-            padding: 10px 0;
-        }
-
-        .message-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .message-action {
-            background: none;
-            border: none;
-            color: var(--gray);
-            cursor: pointer;
+        .result-path {
             font-size: 0.9rem;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            color: var(--gray);
+            margin-bottom: 10px;
+            font-style: italic;
         }
 
-        .message-action:hover {
-            color: var(--primary);
+        .result-excerpt {
+            color: var(--dark);
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        .no-messages {
+        .highlight {
+            background-color: var(--search-highlight);
+            padding: 0 3px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .no-results {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             color: var(--gray);
             font-style: italic;
         }
@@ -556,70 +606,6 @@
             background: #f0f5ff;
             padding: 2px 8px;
             border-radius: 4px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .active {
-            display: grid !important;
-        }
-
-        .edit-mode {
-            border: 2px dashed var(--edit-color);
-            background-color: rgba(255, 209, 102, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .edit-controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .edit-btn {
-            background: var(--edit-color);
-            color: var(--dark);
-            border: none;
-            border-radius: 6px;
-            padding: 8px 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .edit-btn:hover {
-            background: #ffc44d;
-            transform: translateY(-2px);
-        }
-
-        .edit-btn.save {
-            background: var(--success);
-            color: white;
-        }
-
-        .edit-btn.cancel {
-            background: var(--warning);
-            color: white;
-        }
-
-        .edit-textarea {
-            width: 100%;
-            min-height: 300px;
-            padding: 15px;
-            border: 2px solid var(--edit-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: monospace;
-            line-height: 1.5;
-            margin-top: 10px;
         }
 
         .github-status {
@@ -718,6 +704,70 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .active {
+            display: grid !important;
+        }
+
+        .edit-mode {
+            border: 2px dashed var(--edit-color);
+            background-color: rgba(255, 209, 102, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .edit-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .edit-btn {
+            background: var(--edit-color);
+            color: var(--dark);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .edit-btn:hover {
+            background: #ffc44d;
+            transform: translateY(-2px);
+        }
+
+        .edit-btn.save {
+            background: var(--success);
+            color: white;
+        }
+
+        .edit-btn.cancel {
+            background: var(--warning);
+            color: white;
+        }
+
+        .edit-textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid var(--edit-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: monospace;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
         @media (max-width: 768px) {
             .categories {
                 grid-template-columns: 1fr;
@@ -727,11 +777,11 @@
                 font-size: 2.2rem;
             }
             
-            .ai-prompt {
+            .search-prompt {
                 flex-direction: column;
             }
             
-            .ai-submit {
+            .search-submit {
                 padding: 12px;
             }
             
@@ -758,8 +808,8 @@
 <body>
     <header>
         <div class="container">
-            <h1>made by 16</h1>
-            <p class="subtitle">114514</p>
+            <h1>学习资源平台</h1>
+            <p class="subtitle">多科目学习资料与知识点整理</p>
             
             <div class="github-config">
                 <h3><i class="fab fa-github"></i> GitHub 配置</h3>
@@ -780,41 +830,10 @@
     </header>
     
     <div class="container">
-        <div class="categories">
-            <!-- 分类卡片将通过JavaScript动态生成 -->
-        </div>
-        
-        <div id="subcategoriesContainer">
-            <!-- 子类按钮将通过JavaScript动态生成 -->
-        </div>
-        
-        <div id="articleContainer" class="article-content">
-            <!-- 文章内容将通过JavaScript动态生成 -->
-        </div>
-        
-        <div class="ai-section">
-            <div class="ai-header">
-                <div class="ai-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h2 class="ai-title">。</h2>
-            </div>
-            <p>nm</p>
-            
-            <div class="ai-prompt">
-                <input type="text" class="ai-input" id="aiQuestion" placeholder="输入您的问题，例如：如何提高英语写作水平？">
-                <button class="ai-submit" onclick="askAI()">提问</button>
-            </div>
-            
-            <div class="ai-response" id="aiResponse">
-                <!-- AI回复将显示在这里 -->
-            </div>
-        </div>
-        
-        <!-- 留言板部分 -->
+        <!-- 留言板移动到GitHub配置下面 -->
         <div class="message-board">
-            <h2><i class="fas fa-comments"></i> 差点多设备留言板</h2>
-            <p>留nm</p>
+            <h2><i class="fas fa-comments"></i> 多设备留言板</h2>
+            <p>在此留言，消息将同步到所有设备</p>
             
             <div class="message-sync-controls">
                 <button class="message-sync-btn" onclick="syncMessages()">
@@ -843,8 +862,40 @@
             </div>
         </div>
         
+        <!-- 搜索功能区域 -->
+        <div class="search-section">
+            <div class="search-header">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h2 class="search-title">搜索文章</h2>
+            </div>
+            <p>输入关键词搜索相关文章内容</p>
+            
+            <div class="search-prompt">
+                <input type="text" class="search-input" id="searchQuery" placeholder="输入关键词，例如：为学、英语时态...">
+                <button class="search-submit" onclick="searchArticles()">搜索</button>
+            </div>
+            
+            <div class="search-results" id="searchResults">
+                <!-- 搜索结果将显示在这里 -->
+            </div>
+        </div>
+        
+        <div class="categories">
+            <!-- 分类卡片将通过JavaScript动态生成 -->
+        </div>
+        
+        <div id="subcategoriesContainer">
+            <!-- 子类按钮将通过JavaScript动态生成 -->
+        </div>
+        
+        <div id="articleContainer" class="article-content">
+            <!-- 文章内容将通过JavaScript动态生成 -->
+        </div>
+        
         <p class="footer-note">
-            多设备留言同步功能差点启用<br>
+            多设备留言同步功能已启用<br>
             当前内容文件：<span id="currentDataFiles">content.json</span><br>
             留言数据文件：<span id="messagesDataFile">messages.json</span>
         </p>
@@ -940,7 +991,7 @@
         function loadDefaultContent() {
             contentData = {
                 chinese: {
-                    title: "中文学习",
+                    title: "语文",
                     description: "经典课文解析、古诗词鉴赏与现代文阅读",
                     iconClass: "fas fa-book-open",
                     subcategories: [
@@ -997,8 +1048,8 @@
                     ]
                 },
                 english: {
-                    title: "英文",
-                    description: "英语",
+                    title: "英语",
+                    description: "英语语法、词汇与写作技巧",
                     iconClass: "fas fa-language",
                     subcategories: [
                         { 
@@ -1031,7 +1082,7 @@
                 },
                 math: {
                     title: "数学",
-                    description: "数学",
+                    description: "代数、几何与数理逻辑",
                     iconClass: "fas fa-calculator",
                     subcategories: [
                         { 
@@ -1043,7 +1094,15 @@
                                     id: "quadratic",
                                     title: "二次方程解法",
                                     content: `<h3>二次方程的一般形式</h3>
-                                    <p>ax² + bx + c = 0 (a ≠ 0)</p>`
+                                    <p>ax² + bx + c = 0 (a ≠ 0)</p>
+                                    <h3>求解公式</h3>
+                                    <p>判别式 Δ = b² - 4ac</p>
+                                    <p>当 Δ > 0 时，方程有两个不相等的实数根：</p>
+                                    <p>x = [-b ± √(b² - 4ac)] / (2a)</p>
+                                    <p>当 Δ = 0 时，方程有两个相等的实数根：</p>
+                                    <p>x = -b / (2a)</p>
+                                    <p>当 Δ < 0 时，方程有两个共轭复数根：</p>
+                                    <p>x = [-b ± i√(4ac - b²)] / (2a)</p>`
                                 }
                             ]
                         }
@@ -1051,7 +1110,7 @@
                 },
                 others: {
                     title: "副科",
-                    description: "副科",
+                    description: "物理、化学与生物",
                     iconClass: "fas fa-atom",
                     subcategories: [
                         { 
@@ -1061,8 +1120,11 @@
                             articles: [
                                 {
                                     id: "physics",
-                                    title: "力",
-                                    content: `<h3>没东西</h3>`
+                                    title: "力学基础",
+                                    content: `<h3>牛顿三大定律</h3>
+                                    <p><strong>第一定律（惯性定律）</strong>：任何物体都保持静止或匀速直线运动状态，直到外力迫使它改变这种状态为止。</p>
+                                    <p><strong>第二定律（加速度定律）</strong>：物体的加速度与作用力成正比，与物体质量成反比。公式：F = ma</p>
+                                    <p><strong>第三定律（作用与反作用定律）</strong>：两个物体之间的作用力和反作用力总是大小相等，方向相反，作用在同一直线上。</p>`
                                 }
                             ]
                         }
@@ -1425,50 +1487,130 @@
             document.getElementById('articleContainer').style.display = 'none';
         }
 
-        // 模拟AI问答功能
-        function askAI() {
-            const question = document.getElementById('aiQuestion').value;
-            if (!question.trim()) {
-                showNotification('请输入问题');
+        // ==================== 文章搜索功能 ====================
+        function searchArticles() {
+            const query = document.getElementById('searchQuery').value.trim();
+            if (!query) {
+                showNotification('请输入搜索关键词');
                 return;
             }
             
-            const responseArea = document.getElementById('aiResponse');
-            responseArea.style.display = 'block';
-            responseArea.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> 正在思考中...</p>';
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.style.display = 'block';
+            resultsContainer.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> 正在搜索...</p>';
             
-            // 模拟API请求延迟
+            // 模拟搜索延迟
             setTimeout(() => {
-                // 在实际应用中，这里会调用DeepSeek API
-                // 以下是模拟的响应
-                let response = '';
+                const searchResults = performSearch(query);
+                displaySearchResults(searchResults, query);
+            }, 500);
+        }
+        
+        // 执行搜索
+        function performSearch(query) {
+            const results = [];
+            const lowerQuery = query.toLowerCase();
+            
+            // 遍历所有内容
+            for (const categoryId in contentData) {
+                const category = contentData[categoryId];
                 
-                if (question.includes('英语') || question.includes('English')) {
-                    response = `<p><strong>关于英语学习，建议：</strong></p>
-                    <ul>
-                        <li>每天坚持阅读英文文章，可以从简单的新闻开始</li>
-                        <li>使用记忆软件如Anki来记忆单词</li>
-                        <li>找语言交换伙伴进行口语练习</li>
-                        <li>观看英语影视剧，使用英文字幕</li>
-                    </ul>
-                    <p>学习语言的关键在于坚持和沉浸式学习环境。</p>`;
-                } else if (question.includes('数学') || question.includes('math')) {
-                    response = `<p><strong>数学学习技巧：</strong></p>
-                    <ul>
-                        <li>理解概念比死记硬背更重要</li>
-                        <li>多做习题，特别是不同类型的题目</li>
-                        <li>学习时尝试向他人解释概念这能加深理解</li>
-                        <li>建立错题本，定期复习</li>
-                    </ul>
-                    <p>数学是不断练习和思考的学科，不要害怕犯错。</p>`;
-                } else {
-                    response = `<p>感谢您的提问！在真实环境中，这里会通过DeepSeek API提供专业的解答。</p>
-                    <p>您的问题是："${question}"</p>
-                    <p>为了获得更准确的回答，请确保问题具体明确，包含学科领域和具体问题点。</p>`;
+                for (const subcategory of category.subcategories) {
+                    for (const article of subcategory.articles) {
+                        // 在标题和内容中搜索关键词
+                        const titleMatch = article.title.toLowerCase().includes(lowerQuery);
+                        const contentMatch = article.content.toLowerCase().includes(lowerQuery);
+                        
+                        if (titleMatch || contentMatch) {
+                            results.push({
+                                categoryId,
+                                categoryTitle: category.title,
+                                subcategoryId: subcategory.id,
+                                subcategoryTitle: subcategory.title,
+                                articleId: article.id,
+                                title: article.title,
+                                content: article.content
+                            });
+                        }
+                    }
+                }
+            }
+            
+            return results;
+        }
+        
+        // 显示搜索结果
+        function displaySearchResults(results, query) {
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>未找到包含 "${query}" 的文章</p>
+                        <p>请尝试其他关键词</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `<div class="search-results-header">
+                <p>找到 <strong>${results.length}</strong> 个相关结果：</p>
+            </div>`;
+            
+            results.forEach(result => {
+                // 创建内容摘要（截取前200个字符）
+                let excerpt = result.content.replace(/<[^>]*>/g, ' '); // 移除HTML标签
+                excerpt = excerpt.replace(/\s+/g, ' '); // 合并多个空格
+                
+                // 高亮关键词
+                const regex = new RegExp(query, 'gi');
+                excerpt = excerpt.replace(regex, match => 
+                    `<span class="highlight">${match}</span>`
+                );
+                
+                // 截取摘要
+                const excerptLength = 200;
+                let shortExcerpt = excerpt.substring(0, excerptLength);
+                if (excerpt.length > excerptLength) {
+                    shortExcerpt += '...';
                 }
                 
-                responseArea.innerHTML = response;
-            }, 1500);
+                html += `
+                    <div class="search-result-item" onclick="openSearchResult('${result.categoryId}', '${result.subcategoryId}', '${result.articleId}')">
+                        <div class="result-title">
+                            <i class="fas fa-file-alt"></i>
+                            ${result.title.replace(new RegExp(query, 'gi'), match => 
+                                `<span class="highlight">${match}</span>`)}
+                        </div>
+                        <div class="result-path">
+                            ${result.categoryTitle} > ${result.subcategoryTitle}
+                        </div>
+                        <div class="result-excerpt">
+                            ${shortExcerpt}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+        
+        // 打开搜索结果
+        function openSearchResult(categoryId, subcategoryId, articleId) {
+            // 隐藏搜索结果
+            document.getElementById('searchResults').style.display = 'none';
+            
+            // 清空搜索框
+            document.getElementById('searchQuery').value = '';
+            
+            // 显示对应文章
+            showArticle(categoryId, subcategoryId, articleId);
+            
+            // 滚动到文章位置
+            document.getElementById('articleContainer').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
         }
 
         // ==================== 留言板同步功能 ====================
