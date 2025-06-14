@@ -53,7 +53,7 @@
           {
             "id": "tenses",
             "title": "陈述语气",
-            "content": "<h3>reporting speach</h3>\n「,“”」 转 「that」\n<h4>人称转换</h4>\n<ul>\n第一人称（I/you/we）转 第三人称（he/him/they）\n「this」 转 「that」\n「there/that」不需要转换\n</ul>\n\n\n\n"
+            "content": "<h3>reporting speach</h3>\n「,“”」 转 「that」\n<h4>人称转换</h4>\n<li>第一人称（I/you/we）转 第三人称（he/him/they）\n<li>「this」 转 「that」\n<li>「there/that」不需要转换\n\n\n\n\n"
           }
         ]
       }
