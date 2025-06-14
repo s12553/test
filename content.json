@@ -10,6 +10,11 @@
         "icon": "fas fa-scroll",
         "articles": [
           {
+            "id": "xgs",
+            "title": "习惯说",
+            "content": "<h3>ww</h3>"
+          },
+          {
             "id": "tang_poetry",
             "title": "为学",
             "content": "<h3>为学</h3>\n                                    <ul>\n                                        <li><strong>「天下事有難易乎」（第1段）一句運用了甚麼修辭手法？</strong>：设问</li> \n\n                                        <li><strong> 作者以哪兩種人來說明「學」與「不學」的分別？ </strong>：天資才能昏庸的人和天資才能聰敏的人。 </li> \n<li><strong> 富僧和貧僧何者的客觀條件比較優厚？ </strong>：富僧。 </li> \n<li><strong> 為甚麼富僧會「有慚色」（第 2 段）？ </strong>：因為貧僧用一瓶一缽便成功前往南海，但是富僧卻因一直沒有實踐僱船的計劃而未能成\n事，所以富僧為自己欠缺決心感到慚愧。 </li>\n<li><strong> 從西蜀到南海有甚麼困難？</strong>：兩地相隔很遠，有幾千里的距離。  </li> \n<li><strong> 作者認為哪種人是「自敗者」？ </strong>：作者認為自恃聰明和靈敏而不努力學習的人是「自敗者」 </li> \n<li> 作者指出天下事和求學都沒有<strong>難易</strong>的分別，成敗的關鍵在於<strong>個人努力</strong>並\n借<strong>蜀鄙二僧</strong>的故事，帶出 <strong>立志和實踐</strong>的重要，以<strong>勉勵</strong>子姪要力學不倦，才能有所成就 。 </li> \n<li><strong> 俗語有云：「世上無難事，只怕有心人」，這跟作者的觀點相符嗎？為甚麼？ </strong>：相符，「世上無難事，只怕有心人」是指人只要下定決心做事，就能克服任何困難。（1分）而作者在首段亦提出事情沒有難易之分，關鍵在於「做」與「不做」（1分），如果有心去做，困難的事情也會變得容易（1分） </li> \n<li><strong> 你認為本文主張的求學態度，對於你的學習有甚麼啟示？試舉例加以說明。 </strong>：本文主張求學要努力和意志堅定（1分），而當我們在學習上發現自己的短處時，便要堅決地努力改善（1分）。例如發現自己英語的發音咬字不夠準確，便可向老師或同學請教，並多用英語與別人溝通，不要隨意放棄，務求能字正腔圓地讀出英文字詞。（1分）這樣英語的發音咬字，終有一天能得以改善。（1分） </li> \n                                    </ul>\n                                    "
@@ -34,6 +39,18 @@
     "iconClass": "fas fa-language",
     "subcategories": [
       {
+        "id": "ywzw",
+        "title": "作文",
+        "icon": "fas fa-book-open",
+        "articles": [
+          {
+            "id": "yyylw",
+            "title": "议论文",
+            "content": "<h3>zz</h3>"
+          }
+        ]
+      },
+      {
         "id": "dc",
         "title": "单词",
         "icon": "fas fa-book-open",
@@ -53,7 +70,7 @@
           {
             "id": "tenses",
             "title": "陈述语气",
-            "content": "<h3>reporting speach</h3>\n「,“”」 转 「that」\n<h4>人称转换</h4>\n<li>第一人称（I/you/we）转 第三人称（he/him/they）</li>\n<h4>物品/地点代词</h4>\n<li>「this」 转 「that」\n<li>「these」转「those」\n<li>「there/that」不需要转换**\n<h4>时间词转换</h4>\n<li> now 转 then\n<li> today/tonight 转 the day/night\n<li>this week/year… 转 that week/year…\n<li>tomorrow 转 the next day\n<li>yesterday 转 the day before\n<li> _days ago 转 _days before\n<li>last_ 转 the previous_\n<li>next_ 转 the following_\n<li>特殊的例如：three years 不需要转换**\n<h4>情态动词的转换</h4>\n<li>can 转 could\n<li>will 转 would\n<li>shall 转 should\n<li>may 转 might\n<li>must 转 had to\n<li>ought to 不需要转换\n<li>should 不需要转换\n<h4>时态变化</h4>\n<li>普遍真理用一般现在时（+s）*\n<li>一般现在时 转 一般过去时\n<li>一般过去时 转 过去完成时（had+been）\n<li>现在进行时 转 过去进行时\n<li>现在完成时 转 过去完成时\n<li>过去进行时 转 过去完成进行时（had+been+v-ing）\n<h4>转述问句（注：以下仅为拓展，其他变化请参考上面）</h4>\n<li>去除问号\n<li>yes/no问句加if/whether\n<li>去除do/does/did\n<li>did=一般过去时（改时态）*\n<li>动词+名词 转 名词+动词\n<h4>注释：由剑桥高级英语语法第三版(*)，通过小测猜测(**)</h4>\n\n\n\n"
+            "content": "<h3>reporting speach</h3>\n「,“”」 转 「that」\n<h4>人称转换</h4>\n<li>第一人称（I/you/we）转 第三人称（he/him/they）</li>\n<h4>物品/地点代词</h4>\n<li>「this」 转 「that」\n<li>「these」转「those」\n<li>「there/that」不需要转换**\n<h4>时间词转换</h4>\n<li> now 转 then\n<li> today/tonight 转 the day/night\n<li>this week/year… 转 that week/year…\n<li>tomorrow 转 the next day\n<li>yesterday 转 the day before\n<li> _days ago 转 _days before\n<li>last_ 转 the previous_\n<li>next_ 转 the following_\n<li>特殊的例如：three years 不需要转换**\n<h4>情态动词的转换</h4>\n<li>can 转 could\n<li>will 转 would\n<li>shall 转 should\n<li>may 转 might\n<li>must 转 had to\n<li>ought to 不需要转换\n<li>should 不需要转换\n<h4>时态变化</h4>\n<li>普遍真理用一般现在时（+s）*\n<li>一般现在时 转 一般过去时\n<li>一般过去时 转 过去完成时（had+been）\n<li>现在进行时 转 过去进行时\n<li>现在完成时 转 过去完成时\n<li>过去进行时 转 过去完成进行时（had+been+v-ing）\n<h4>转述问句（注：一下仅为拓展，其他变化请参考上面）</h4>\n<li>去除问号\n<li>yes/no问句加if/whether\n<li>去除do/does/did\n<li>did=一般过去时（改时态）\n<li>动词+名词 转 名词+动词\n<h4>注释：由剑桥高级英语语法第三版(*)，通过小测猜测(**)</h4>\n\n\n\n"
           }
         ]
       }
