@@ -38,6 +38,19 @@
     "description": "英语",
     "iconClass": "fas fa-language",
     "subcategories": [
+      
+      {
+        "id": "ywqt",
+        "title": "其他",
+        "icon": "fas fa-book-open",
+        "articles": [
+          {
+            "id": "ywla",
+            "title": "LA",
+            "content": ""
+          }
+        ]
+      },
       {
         "id": "ywzw",
         "title": "作文",
