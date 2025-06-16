@@ -1,9 +1,22 @@
+
 {
   "chinese": {
     "title": "中文",
     "description": "中文",
     "iconClass": "fas fa-book-open",
     "subcategories": [
+      {
+        "id": "wyw",
+        "title": "文言文",
+        "icon": "fas fa-scroll",
+        "articles": [
+          {
+          "id": "zwwypz",
+          "title": "文言篇章",
+          "content": "<h3>ww</h3>"
+          }
+        ]
+      },
       {
         "id": "kwwd",
         "title": "课文问答",
@@ -46,7 +59,7 @@
           {
             "id": "ywla",
             "title": "LA",
-            "content": "author:roald dahl\nCharacters: ﻿﻿The girl\n* ﻿﻿Mrs. Winters\n* ﻿﻿Mr. and Mrs. Gregg\n* ﻿﻿Philip Gregg\n* ﻿﻿William Gregg\n* ﻿﻿The Ducks\nSetting: probably autumn time,at a farm\n\n• Theme: We need to be understanding and loving towards animaks, people and the environment around us\n\n"
+            "content": "author:roald dahl\nCharacters:   The girl\n*   Mrs. Winters\n*   Mr. and Mrs. Gregg\n*   Philip Gregg\n*   William Gregg\n*   The Ducks\nSetting: probably autumn time,at a farm\n\n• Theme: We need to be understanding and loving towards animaks, people and the environment around us\n\n"
           }
         ]
       },
