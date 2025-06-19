@@ -130,6 +130,40 @@
     "iconClass": "fas fa-atom",
     "subcategories": [
       {
+        "id": "xfls",
+        "title": "世界历史",
+        "icon": "fas fa-flask",
+        "articles": [
+          {        
+            "id": "mggm",
+            "title": "美国革命",
+            "content": ""
+          },
+          {        
+            "id": "xgdfz",
+            "title": "香港的发展",
+            "content": ""
+          }
+        ]
+      },
+      {
+        "id": "zgls",
+        "title": "中国历史",
+        "icon": "fas fa-flask",
+        "articles": [
+          {        
+            "id": "qcdmq",
+            "title": "外力冲击与内忧",
+            "content": ""
+          },
+          {        
+            "id": "qtdtqq",
+            "title": "清廷的图强",
+            "content": ""
+          }
+        ]
+      },
+      {
         "id": "science",
         "title": "科学",
         "icon": "fas fa-flask",
