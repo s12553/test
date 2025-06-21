@@ -112,13 +112,23 @@
     "subcategories": [
       {
         "id": "algebra",
-        "title": "代数",
+        "title": "单元12",
         "icon": "fas fa-superscript",
         "articles": [
           {
             "id": "quadratic",
-            "title": "二次方程解法",
-            "content": "<h3>二次方程的一般形式</h3>"
+            "title": "频数多边形和曲线",
+            "content": ""
+          },
+          {
+            "id": "psdbx",
+            "title": "累计频数多边形和曲线",
+            "content": ""
+          },
+          {
+            "id": "yjtdyyhwy",
+            "title": "统计图的应用和误用",
+            "content": ""
           }
         ]
       }
