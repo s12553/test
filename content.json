@@ -147,7 +147,7 @@
           {
             "id": "ssb",
             "title": "试算表",
-            "content": "不知道放什么"
+            "content": "不知道放什么\n<h4>名次：=RANK（x,$x$x:$x$x,0)</h4>\n<h4>加：=ADD </h4>\n<h4>最大：=MAX </h4>\n<h4>最小：=MIN </h4>"
           },
           {
             "id": "dnxt",
