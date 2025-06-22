@@ -140,6 +140,23 @@
     "iconClass": "fas fa-atom",
     "subcategories": [
       {
+        "id": "ptdn",
+        "title": "普脑",
+        "icon": "fas fa-flask",
+        "articles": [
+          {
+            "id": "ssb",
+            "title": "试算表",
+            "content": ""
+          },
+          {
+            "id": "dnxt",
+            "title": "电脑系统",
+            "content": ""
+          }
+        ]
+      },
+      {
         "id": "xfls",
         "title": "世界历史",
         "icon": "fas fa-flask",
